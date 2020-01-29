@@ -465,6 +465,7 @@ function MenuPool:AddSubMenu(Menu, Text, Description, KeepPosition, KeepBanner)
             SubMenu = UIMenu.New(Menu.Title:Text(), string.upper(Text))
         end
         if KeepBanner then
+            SubMenu.Title = Menu.Title
             if Menu.Logo ~= nil then
                 SubMenu.Logo = Menu.Logo
             else
