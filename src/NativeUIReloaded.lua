@@ -3435,8 +3435,8 @@ end
 ---@param A number
 ---@return table
 ---@public
-function NativeUI.CreateMenu(Title, Subtitle, X, Y, TxtDictionary, TxtName, Heading, R, G, B, A)
-    return UIMenu.New(Title, Subtitle, X, Y, TxtDictionary, TxtName, Heading, R, G, B, A)
+function NativeUI.CreateMenu(Title, Subtitle, X, Y, TxtDictionary, TxtName, Heading, R, G, B, A, Font, FontScale)
+    return UIMenu.New(Title, Subtitle, X, Y, TxtDictionary, TxtName, Heading, R, G, B, A, Font, FontScale)
 end
 
 ---CreateItem
@@ -6426,7 +6426,7 @@ end
 ---@param A number
 ---@return table
 ---@public
-function UIMenu.New(Title, Subtitle, X, Y, TxtDictionary, TxtName, Heading, R, G, B, A)
+function UIMenu.New(Title, Subtitle, X, Y, TxtDictionary, TxtName, Heading, R, G, B, A, Font, FontScale)
     local X, Y = tonumber(X) or 0, tonumber(Y) or 0
     if Title ~= nil then
         Title = tostring(Title) or ""
@@ -6473,10 +6473,20 @@ function UIMenu.New(Title, Subtitle, X, Y, TxtDictionary, TxtName, Heading, R, G
     else
         A = 255
     end
+    if Font ~= nil then
+        Font = tonumber(Font) or 0
+    else
+        Font = 1
+    end
+    if FontScale ~= nil then
+        FontScale = tonumber(FontScale) or 0
+    else
+        FontScale = 1.15
+    end
     local _UIMenu = {
         Logo = Sprite.New(TxtDictionary, TxtName, 0 + X, 0 + Y, 431, 107, Heading, R, G, B, A),
         Banner = nil,
-        Title = UIResText.New(Title, 215 + X, 20 + Y, 1.15, 255, 255, 255, 255, 1, 1, 0),
+        Title = UIResText.New(Title, 215 + X, 20 + Y, FontScale, 255, 255, 255, 255, Font, 1, 0),
         BetterSize = false,
         Subtitle = { ExtraY = 0 },
         WidthOffset = 0,
